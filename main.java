@@ -1,18 +1,16 @@
 //Lineas de espera
 import java.util.Scanner;
 
-import javax.sound.sampled.SourceDataLine;
-
 public class Main{
     public static void main(String []args){
         Scanner lector=new Scanner(System.in);
         byte opcion=0;
-        double μ, λ, p, Lq, Wq, W, c, a, p0, pEspera, L;
+        double μ, λ, p, Lq, Wq, W, c, a, termino1, termino2, sumatoria=0.0, p0, pEspera, L;
         do{
             System.out.println ("\nMENU DE LINEAS DE ESPERA");
             System.out.println("1. Modelo M/M/1");
             System.out.println("2. Modelo M/M/c");
-            System.out.println("3. Modelo M/M/1/k")
+            System.out.println("3. Modelo M/M/1/k");
             System.out.println("4. Salir");
             opcion=lector.nextByte();
 
@@ -44,7 +42,15 @@ public class Main{
                 c=lector.nextDouble();
 
                 System.out.println("\nLos resultados de la politica son: ");
-                
+                a=λ/μ;
+                p=a/c;
+                    for (int i = 0; i <= c-1; i++) {
+                        sumatoria += Math.pow(a,i)/(factorial(i));
+                }
+                termino1=Math.pow(a, c)/factorial(c);
+                termino2=1/(1-p);
+                p0=1/(sumatoria+termino1*termino2);
+                System.out.println("Probabilidad de que no haya nadie en el sistema: "+ p0);
                 }
                 case 3->{
 
@@ -57,5 +63,13 @@ public class Main{
                 }
             }
         }while (opcion!=4);
+    }
+    public static double factorial (double numero){
+        if(numero == 0 || numero ==1){
+            return 1;
+        }else{
+            return numero * factorial (numero - 1);
+            
+        }
     }
 }
