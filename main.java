@@ -34,23 +34,33 @@ public class Main{
                 }
                 case 2 ->{
                 System.out.println("\n Resolucion de politica con el modelo m/m/c");
-                System.out.println("\n Ingresa el numero promedio de llegadas (λ): ");
+                System.out.println("\n Ingresa el numero promedio de llegadas: ");
                 λ=lector.nextDouble();
-                System.out.println("Ingresa el numero promedio de servicio (μ): ");
+                System.out.println("Ingresa el numero promedio de servicio: ");
                 μ=lector.nextDouble();
-                System.out.println("Ingresa el numero de servidores (c): ");
+                System.out.println("Ingresa el numero de servidores: ");
                 c=lector.nextDouble();
 
                 System.out.println("\nLos resultados de la politica son: ");
                 a=λ/μ;
                 p=a/c;
-                    for (int i = 0; i <= c-1; i++) {
-                        sumatoria += Math.pow(a,i)/(factorial(i));
+                    for (int n = 0; n <= c-1; n++) {
+                        sumatoria += Math.pow(a,n)/(factorial(n));
                 }
                 termino1=Math.pow(a, c)/factorial(c);
                 termino2=1/(1-p);
                 p0=1/(sumatoria+termino1*termino2);
                 System.out.println("Probabilidad de que no haya nadie en el sistema: "+ p0);
+                pEspera= (Math.pow(a, c)/(factorial(c)*(1-p)))*p0;
+                System.out.println("Probabilidad de que un cliente tenga que esperar: " + pEspera);
+                Lq=pEspera*p/ (1-p);
+                System.out.println("Longitud promedio en cola: " + Lq);
+                Wq= Lq/λ;
+                System.out.println("Tiempo promedio de espera en la cola: " + Wq);
+                W=Wq+(1/μ);
+                System.out.println("Tiempo total en el sistema: " + W);
+                L=λ*W;
+                System.out.println("Numero promedio en el sistema: " + L);
                 }
                 case 3->{
 
