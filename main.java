@@ -5,7 +5,7 @@ public class Main{
     public static void main(String []args){
         Scanner lector=new Scanner(System.in);
         byte opcion=0;
-        double μ, λ, p, Lq, Wq, W, c, a, termino1, termino2, sumatoria=0.0, p0, pEspera, L;
+        double μ, λ, p, Lq, Wq, W, c, a, termino1, termino2, sumatoria=0.0, p0, pEspera, L, k, pk, λe;
         do{
             System.out.println ("\nMENU DE LINEAS DE ESPERA");
             System.out.println("1. Modelo M/M/1");
@@ -63,7 +63,27 @@ public class Main{
                 System.out.println("Numero promedio en el sistema: " + L);
                 }
                 case 3->{
-
+                System.out.println("Resolucion de la politica con rechazo: ");
+                System.out.println("\n Ingresa el numero promedio de llegadas: ");
+                λ=lector.nextDouble();
+                System.out.println("\nIngresa el numero promedio de servicio: ");
+                μ=lector.nextDouble();
+                System.out.println("Ingresa el limite de rechazo : ");
+                k=lector.nextDouble();
+                
+                System.out.println("\nLos resultados de la politica son: ");
+                p=λ/μ;
+                System.out.println("Utilizacion del sistema: " + p);
+                p0=(1-p)/(1-Math.pow((p),(k+1)));
+                System.out.println("Probabilidad de que no haya nadie en el sistema: " + p0);
+                pk= Math.pow(p, k)*p0;
+                System.out.println("Probabilidad de rechazo: " + pk);
+                λe=λ*(1-pk);
+                System.out.println("Tasa efectiva de llegadas: " + λe);
+                L=(p*(1-(k+1)*Math.pow(p, k)+k*Math.pow(p, (k+1))))/((1-p)*(1-Math.pow(p, k+1)));
+                System.out.println("Longitud del sistema: " + L);
+                W=L/λe;
+                System.out.println("Tiempo total promedio del sistema: " + W);
                 }
                 case 4->{
                     System.out.println("Saliendo");    
